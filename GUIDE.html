@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="docs.css" type="text/css" />
+</head>
+<body>
+<h1 id="batalla-rpg---guía-de-la-práctica">Batalla RPG - Guía de la práctica</h1>
+<p>La guía de la práctica te sugiere un orden para completar con éxito la implementación de la funcionalidad de la práctica. Prepárate, eso sí, para <strong>leer mucho JavaScript</strong> y ten a mano Google, la MDN y StackOverflow.</p>
+<h2 id="el-modelo-de-datos">1. El modelo de datos</h2>
+<p>En el juego existen muchos tipos de entidades, algunos relacionados y otros no.</p>
+<p>La especificación de tales entidades puede encontrarse en <code>spec/entities.js</code> y la implementación en <code>src/entities.js</code>, <code>src/Character.js</code> y <code>src/items.js</code>.</p>
+<h3 id="efectos">Efectos</h3>
+<p>Quizá el tipo más sencillo sea el tipo <code>Effect</code> en <code>src/items.js</code> y especificado en <code>spec/entities.js</code>. Comienza por aquí.</p>
+<h3 id="personajes">Personajes</h3>
+<p>Continúa activando los tests relacionados con el tipo <code>Character</code> y desactiva los demás.</p>
+<p>A continuación abre <code>src/Character.js</code> e implementa las partes que faltan.</p>
+<h3 id="elementos">Elementos</h3>
+<p>Continúa con el módulo <code>src/items.js</code> activando paulatinamente las <em>suites</em> para los tipos <code>Item</code>, <code>Weapon</code> y <code>Scroll</code> que encontrarás en <code>spec/entities.js</code>.</p>
+<h3 id="entidades-por-defecto">Entidades por defecto</h3>
+<p>Tienes que crear algunos personajes, armas y pergaminos por defecto para que otras prácticas puedan usarlos. La <em>suite</em> <em>built-in entities</em> en <code>spec/entities.js</code> incluye incluye todas las espectativas de estas entidades.</p>
+<p>Ve al archivo <code>src/entities.js</code> y completa las que falten. Fíjate que las propiedades son <em>getters</em> para que cada acceso a las propiedades te devuelvan un nuevo personaje.</p>
+<h2 id="la-lista-de-turnos">2. La lista de turnos</h2>
+<p>Esta es fácil. La especificación se encuentra en <code>spec/TurnList.js</code> y la implementación en <code>src/TurnList.js</code>. Tan sólo rellena los huecos. Es pura algoritmia. Quizá tengas que mirarte cómo funciona la función <code>Array.sort()</code> para no implementarte tu propia función de búsqueda.</p>
+<h2 id="la-vista-del-personaje">3. La vista del personaje</h2>
+<p>La vista del personaje es una representación de sólo lectura de las estadísticas del mismo. Su especificación está en <code>spec/CharactersView.js</code> y su implementación en <code>src/CharactersView.js</code>. Puedes continuar por ahí.</p>
+<h2 id="el-grupo-de-opciones">4. El grupo de opciones</h2>
+<p>El grupo de opciones representa las opciones que se pueden elegir en un momento dado. La especificación está en <code>spec/CharactersView.js</code> y la implementación casi completa, en <code>src/CharactersView.js</code>. Fíjate cómo el tipo <code>Options</code> extiende <code>EventEmitter</code>. Tu misión será implementar el método <code>.select()</code> para que al llamarlo se emita un evento acorde con la especificación.</p>
+<h2 id="la-pila-de-opciones">5. La pila de opciones</h2>
+<p>Un RPG se compone normalmente de varios menús apilados. Por ejemplo, el menú de acciones da paso al menú de hechizos que da paso al menú de objetivos. En cualquier momento podemos regresar al menú anterior. La pila de opciones en <code>src/OptionsStack.js</code> y especificada en <code>spec/OptionsStack.js</code> refleja este comportamiento.</p>
+<p>La API es la misma que el grupo de opciones pero los métodos realmente sólo se deben redirigir al último menú apilado. Fíjate en cómo se apilan y desapilan menús nuevos.</p>
+<h2 id="utilidades">6. Utilidades</h2>
+<p>Tranqui. No tienes que hacer nada aquí, tan sólo ten en cuenta que tienes el módulo <code>src/utils.js</code> donde puedes colocar más utilidades si encuentras que andas repitiendo el mismo código en muchas partes. Te aconsejo que escribas algún test. No es obligatorio pero si necesitas una nueva función auxiliar y añades un test, sube note. Puedes inspirarte en los que ya hay en <code>spec/utils.js</code>.</p>
+<h2 id="la-batalla">7. La batalla</h2>
+<p>Has llegado al plato fuerte de la práctica. Hasta aquí era todo preparar los tipos en los que se apoya el tipo <code>Battle</code>. Ahora tendrás que implementar la máquina de estados que controla las acciones de batalla: defender, atacar y lanzar un hechizo.</p>
+<p>Fíjate que los combatientes, sus armas y los hechizos <strong>no son los que vienen por defecto en <code>src/entities.js</code></strong> sino los que se encuentran en <code>spec/samplelib.js</code>.</p>
+<p>La especificación de la batalla está en <code>spec/Battle.js</code> y la implementación en <code>src/Battle.js</code>. Para abordar esta implementación con éxito es necesario que todos los tests hasta ahora pasen.</p>
+<p>En esta parte de la práctica no hay recomendaciones sobre qué tests activar primero. Tendrás que experimentar.</p>
+<p>Repasa bien el código, muchos de los ejercicios consisten en dar las implementaciones de <strong>funciones auxiliares</strong>. Es el caso de: + <code>assignParty()</code> + <code>useUniqueNames()</code> + <code>isAlive()</code> + <code>getCommonParty()</code></p>
+<p>Fíjate entonces en la función <code>_showAction()</code> que hará que las acciones de batalla estén disponibles en el atributo <code>opciones</code>.</p>
+<p>Ahora concéntrate en las acciones. La implementación de <code>_defend()</code> está casi hecha. Sólo tendrás que completar las funciones <code>_improveDefense()</code> y <code>_restoreDefense()</code> para el cálculo de la defensa mejorada.</p>
+<p>La acción <em>defend</em> rellena la estructura <code>this._action</code> con el nombre de la acción, los identificadores del personaje activo y del objetivo, el efecto y la nueva defensa. Todos menos la defensa son necesarios para poder llamar a la función <code>_executeAction()</code> que ejecutará la acción e informará del resultado.</p>
+<p>Durante el proceso de implementación de las acciones, tendrás que implementar también <code>_showTargets()</code> y <code>_showScrolls()</code> de manera similar, de acuerdo a la especificación y a la <a href="./README.md">descripciónl ejercicio</a>.</p>
+<h2 id="calidad-del-código">8. Calidad del código</h2>
+<p>Cuando termines y todos tus tests estén en verde habrás terminado la práctica.</p>
+<p>Rotula la rama con un <em>tag</em> o cambia de rama antes de mejorar la calidad del código.</p>
+<p>Lee ahora los errores de estilo que el comando de tests pueda proporcionar y pasa los tests cada vez que realices una modificación para asegurarte que no has roto nada.</p>
+<h2 id="fin">Fin</h2>
+<p>¡Enhorabuena! Has completado la práctica.</p>
+</body>
+</html>

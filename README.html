@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="docs.css" type="text/css" />
+</head>
+<body>
+<h1 id="batalla-rpg">Batalla RPG</h1>
+<p>Esta es la primera práctica para el curso de Programación de Videojuegos en Lenguajes Interpretados. Los objetivos principales son <strong>acostumbrarte a leer código JavaScript</strong> y que <strong>practiques la implementación de modelos y algoritmos</strong>.</p>
+<p>El objetivo secundario es que practiques la metodología <strong><em>TDD</em></strong>, del inglés <em>Test Driven Development</em> o desarrollo dirigido por tests.</p>
+<h2 id="instalación-y-tests">Instalación y tests</h2>
+<p>Clona este repositorio y en el interior del mismo ejecuta:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript">npm install</code></pre></div>
+<p>Ahora puedes pasar los tests con:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript">npm test</code></pre></div>
+<p>La práctica ha de entregarse con 0 errores y 0 especificaciones pendientes:</p>
+<pre><code>$ npm test
+
+&gt; pvli2017-rpg-battle@1.0.0 test /Users/salva/workspace/pvli2017-rpg-battle
+&gt; node ./node_modules/gulp/bin/gulp.js test
+
+[09:43:57] Using gulpfile ~/workspace/pvli2017-rpg-battle/gulpfile.js
+[09:43:57] Starting &#39;lint&#39;...
+[09:43:57] Finished &#39;lint&#39; after 71 ms
+[09:43:57] Starting &#39;test&#39;...
+[09:43:57] Finished &#39;test&#39; after 41 ms
+........................................................................................
+88 specs, 0 failures
+Finished in 0.4 seconds</code></pre>
+<h2 id="calidad-del-código">Calidad del código</h2>
+<p>Este proyecto exige que tu código cumpla con ciertos estándares de calidad. El conjunto de restricciones responde a la <a href="http://eslint.org/docs/rules/">especificación recomendada por ESLint</a> con dos alteraciones: + Se debe usar el estilo <em>camelCase</em> para identificadores. + Se deben usar comillas simples para las cadenas. + Se deben poner espacios entre operandos y operadores. + No se permiten líneas de más de 100 caracteres. + No se permiten funciones de más de 40 <em>statements</em></p>
+<p>En definitiva esas reglas están ahí para que los programas sean fáciles de leer. La mejor recomendación que podéis seguir es hacer lo que veáis que ya está hecho. Cuando contribuyáis a código ajeno, ved y copiad.</p>
+<p>Las dos últimas reglas están pensadas para que no hagáis funciones muy largas, tanto en horizontal como en vertical. Tened en cuenta que lo que hemos limitado es el número de <em>statements</em>, no de líneas así que el siguiente ejemplo son realmente 4 <em>statements</em>:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">f</span>() <span class="op">{</span>
+  <span class="kw">var</span> x <span class="op">=</span> <span class="dv">1</span><span class="op">;</span>
+  <span class="kw">var</span> y <span class="op">=</span> <span class="dv">2</span><span class="op">;</span>
+  <span class="cf">return</span> x <span class="op">+</span> <span class="at">g</span>(y)<span class="op">;</span>
+
+  <span class="kw">function</span> <span class="at">g</span>(n) <span class="op">{</span>
+    <span class="cf">return</span> n <span class="op">*</span> n<span class="op">;</span>
+  <span class="op">}</span>
+<span class="op">}</span></code></pre></div>
+<p>Al encargado de comprobar el estilo del código se lo llama <em>linter</em> y éste se pasa automáticamente junto con los tests. Un error se muestra así:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="ss">/Users/salva/workspace/pvli2017</span><span class="op">-</span>rpg<span class="op">-</span>battle/src/<span class="va">TurnList</span>.<span class="at">js</span>
+  <span class="dv">15</span><span class="op">:</span><span class="dv">8</span>  error  Identifier <span class="st">&#39;snake_case&#39;</span> is not <span class="kw">in</span> camel <span class="cf">case</span>  camelcase</code></pre></div>
+<p>Ahí se indica dónde está el error mediante la ruta del fichero, la línea y la columna en formato <code>fila:columna</code>.</p>
+<p>No es necesario pasar el linter para aprobar la práctica pero cuenta positivamente.</p>
+<h2 id="metodología-y-guía-de-la-práctica">Metodología y guía de la práctica</h2>
+<p>Antes de comenzar lee el documento <a href="./TDD.md">TDD.md</a> y la guía de la práctica <a href="./GUIDE.md">GUIDE.md</a>. El primero presenta la metodología que seguirás para desarrollar la práctica y el segundo te muestra un orden de activación de tests sensato de cara a completar la práctica con éxito.</p>
+<h2 id="descripción-de-la-batalla">Descripción de la batalla</h2>
+<p>El objetivo de la práctica es crear una <strong>biblioteca que modele el funcionamiento de una batalla RPG</strong>.</p>
+<p>Los combatientes en la batalla son personajes en distintos bandos que lucharán entre sí. Cuando sólo queden miembros de un bando este será declarado como vencedor.</p>
+<p>Al comienzo de la batalla, los personajes son ordenados por su iniciativa, de mayor a menor y los turnos se suceden en este orden hasta que sólo quedan personajes de un bando. Si un personaje ha muerto, es decir, sus puntos de vida son 0, su turno se salta.</p>
+<p>Cuando le llega el turno a un personaje este puede elegir entre realizar tres acciones: defender, atacar o lanzar un hechizo.</p>
+<!-- TODO [Carlos, 18-10-2016 10:23]: ¿la defensa sube para un turno, o para
+todos los turnos? -->
+<p>Si defiende, su defensa aumentará en un 10%. La defensa es importante porque afecta en el modo en que un personaje bloquea el efecto de las armas y los hechizos.</p>
+<p>Si ataca, lo hará sobre un personaje objetivo que realizará una tirada de defensa. Si el objetivo supera esta tirada no recibirá ningún efecto pero si la falla, recibirá todo el daño del arma.</p>
+<p>Si finalmente decide utilizar un hechizo, habrá de seleccionar el hechizo y luego un objetivo. Los hechizos se encuentran en un grimorio común a todo el bando y consumen puntos de maná. Si el personaje no tiene suficientes puntos de maná para seleccionar un hechizo, no puede utilizarlo.</p>
+<h2 id="los-bandos">Los bandos</h2>
+<p>Los bandos tienen un identificador, miembros y hechizos. Al conjunto de hechizos lo llamamos el grimorio del bando. Por ejemplo, la estructura:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> setup <span class="op">=</span> <span class="op">{</span>
+  <span class="dt">heroes</span><span class="op">:</span> <span class="op">{</span>
+    <span class="dt">members</span><span class="op">:</span> [heroTank<span class="op">,</span> heroWizard]<span class="op">,</span>
+    <span class="dt">grimoire</span><span class="op">:</span> [fire<span class="op">,</span> health]
+  <span class="op">},</span>
+  <span class="dt">monsters</span><span class="op">:</span> <span class="op">{</span>
+    <span class="dt">members</span><span class="op">:</span> [fastEnemy]<span class="op">,</span>
+    <span class="dt">grimoire</span><span class="op">:</span> [fire<span class="op">,</span> health]
+  <span class="op">}</span>
+<span class="op">};</span></code></pre></div>
+<p>Contiene dos bandos con identificadores <code>heroes</code> y <code>monsters</code>. El bando <code>heroes</code> tiene dos miembros. <code>heroTank</code> y <code>heroWizard</code>, mientras que el bando <code>monsters</code> sólo uno, <code>fastEnemy</code>. Los dos bandos tienen grimorios con los hechizos <code>fire</code> y <code>health</code>.</p>
+<h2 id="los-personajes">Los personajes</h2>
+<p>Los personajes tienen un <strong>nombre</strong>, un <strong>bando opcional</strong> y una serie de características que determinan su valor en la batalla. Estas características son iniciativa, defensa, puntos de vida y de maná, y máximos de vida y de maná.</p>
+<p>La <strong>iniciativa</strong> determina el orden en el que los personajes aparecerán en la lista de turnos. Cuanto más alto, antes aparecen en esta lista.</p>
+<p>La <strong>defensa</strong> establece la probabilidad (de 0 a 100) de que un <a href="#efectos">efecto</a> actúe sobre el personaje.</p>
+<p>Los <strong>puntos de maná</strong> sirven para pagar los costes mágicos de los hechizos y los <strong>puntos de vida</strong> indican cuánto daño es capaz de resistir el personaje antes de ser morir (puntos de vida a 0). Ambas características están ligadas a unos valores máximos <strong>puntos de maná máximos</strong> y <strong>puntos de vida máximos</strong> respectivamente que no pueden sobrepasar.</p>
+<p>La siguiente tabla resume las características numéricas y sus límites.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Característica</th>
+<th align="right">Mínimo</th>
+<th align="right">Máximo</th>
+<th align="center">Limitado por</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Iniciativa</td>
+<td align="right">0</td>
+<td align="right">-</td>
+<td align="center">-</td>
+</tr>
+<tr class="even">
+<td align="left">Defensa</td>
+<td align="right">0</td>
+<td align="right">100</td>
+<td align="center">-</td>
+</tr>
+<tr class="odd">
+<td align="left">Puntos de vida</td>
+<td align="right">0</td>
+<td align="right">-</td>
+<td align="center">Puntos de vida máximos</td>
+</tr>
+<tr class="even">
+<td align="left">Puntos de maná</td>
+<td align="right">0</td>
+<td align="right">-</td>
+<td align="center">Puntos de maná máximos</td>
+</tr>
+</tbody>
+</table>
+<h2 id="las-acciones">Las acciones</h2>
+<p>Si durante su turno, un personaje elije <strong>defender</strong>, entrará en estado de defensa mejorada aumentando un 10% su defensa (redondeando arriba). El personaje puede defender tantas veces como quiera, aumentando su defensa en cada turno que defienda pero tan pronto otro personaje lo ataque, perderá su mejora.</p>
+<p>Si elige <strong>atacar</strong>, habrá de elegir un personaje objetivo de entre todos los personajes vivos que queden en la batalla. El personaje causará el efecto de su arma al objetivo siguiendo las <a href="#reglas-de-efecto">reglas de aplicación de efectos</a>.</p>
+<p>Por último, un personaje puede <strong>lanzar un hechizo</strong>, en tal caso se debe elegir un hechizo que se pueda pagar del grimorio del bando y un objetivo. De nuevo se utilizarán las <a href="#reglas-de-efecto">reglas de aplicación de efectos</a> con el efecto del hechizo.</p>
+<h2 id="efectos">Efectos</h2>
+<p>Armas y hechizos contienen efectos. Un arma contendrá un efecto que <strong>siempre reducirá los puntos de vida</strong>, los hechizos pueden tener efectos variados. Exceptuando el nombre y el bando, <strong>todas las características son susceptibles de verse alteradas por efectos</strong>.</p>
+<h3 id="reglas-de-efecto">Reglas de efecto</h3>
+<p>Las reglas de efecto esperan un efecto cualquiera, un objetivo y un indicador de alianza que indica si el efecto lo aplica un aliado del objetivo o no.</p>
+<p>El procedimiento es el siguiente:</p>
+<ol style="list-style-type: decimal">
+<li>Si el indicador de alianza indica que son aliados, continúa con el paso 2. Si no:
+<ol style="list-style-type: decimal">
+<li>Genera un número al azar del 1 al 100.</li>
+<li>Si el resultado se encuentra por debajo o es igual a la resistencia del objetivo, suspende estos pasos. Si no, continúa con el paso 2.</li>
+</ol></li>
+<li>Por cada característica afectada por el efecto
+<ol style="list-style-type: decimal">
+<li>Suma el valor del efecto al valor de la característica del objetivo.</li>
+<li>Corrige el valor para que se encuentre entre 0 y el máximo para esa característica, si tiene.</li>
+</ol></li>
+</ol>
+<h2 id="armas-y-hechizos">Armas y hechizos</h2>
+<p>Armas y hechizos son elementos con efectos. La diferencia sustancial entre ellos es que los hechizos tienen un coste en puntos de maná para el lanzador del hechizo. Este coste se aplica tenga o no tenga éxito la defensa del objetivo.</p>
+<p>El efecto de los hechizos puede ser variado así como el de las armas pero en el caso de las armas el efecto debe reducir los puntos de vida de alguna forma.</p>
+<h2 id="la-api-de-batalla">La API de batalla</h2>
+<p>La batalla tendrá los siguientes métodos:</p>
+<ul>
+<li><code>setup()</code> para establecer la configuración inicial como la que hemos mostrados antes.</li>
+<li><code>start()</code> para comenzar la batalla.</li>
+<li><code>stop()</code> para detener la batalla.</li>
+</ul>
+<p>Además la batalla expone los siguientes atributos:</p>
+<ul>
+<li><code>characters</code> para inspeccionar el estado de los personajes.</li>
+<li><code>scrolls</code> para inspeccionar el estado de los personajes.</li>
+<li><code>options</code> para controlar la batalla.</li>
+</ul>
+<p>La batalla emitirá los siguientes eventos:</p>
+<ul>
+<li><code>start</code> junto con los identificadores de los combatientes por bando, al comienzo de la batalla.</li>
+<li><code>turn</code> junto con la información del turno, cada vez que le toque a un personaje.</li>
+<li><code>info</code> con el resultado de una acción.</li>
+<li><code>end</code> cuando sólo quede un bando.</li>
+</ul>
+<p>En cualquier caso, el objeto de contexto será la <code>Batalla</code>.</p>
+<h2 id="la-interfaz-de-control">La interfaz de control</h2>
+<p>Controlar el curso de la batalla consiste en decidir qué ocurre a cada turno. Para ello nos tendremos que suscribir al evento <code>turn</code> y elegir entre las alternativas que se nos ofrecen en <code>options</code>:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> battle <span class="op">=</span> <span class="kw">new</span> <span class="at">Battle</span>(setup)<span class="op">;</span>
+<span class="va">battle</span>.<span class="at">on</span>(<span class="st">&#39;turn&#39;</span><span class="op">,</span> <span class="kw">function</span> (turn) <span class="op">{</span>
+
+  <span class="co">// Los héroes dañan al primer enemigo disponible.</span>
+  <span class="cf">if</span> (<span class="va">turn</span>.<span class="at">party</span> <span class="op">===</span> <span class="st">&#39;heroes&#39;</span>) <span class="op">{</span>
+    <span class="kw">this</span>.<span class="va">options</span>.<span class="at">select</span>(<span class="st">&#39;attack&#39;</span>)<span class="op">;</span>
+    <span class="kw">var</span> candidates <span class="op">=</span> <span class="kw">this</span>.<span class="va">options</span>.<span class="at">list</span>()<span class="op">;</span>
+    <span class="kw">var</span> monsters <span class="op">=</span> <span class="va">candidates</span>.<span class="at">filter</span>(<span class="va">isMonster</span>.<span class="at">bind</span>(<span class="kw">this</span>))<span class="op">;</span>
+    <span class="kw">this</span>.<span class="va">options</span>.<span class="at">select</span>(monsters[<span class="dv">0</span>])<span class="op">;</span>
+  <span class="op">}</span>
+
+  <span class="co">// Los monstruos sólo defienden.</span>
+  <span class="cf">if</span> (<span class="va">turn</span>.<span class="at">party</span> <span class="op">===</span> <span class="st">&#39;monsters&#39;</span>) <span class="op">{</span>
+    <span class="kw">this</span>.<span class="va">options</span>.<span class="at">select</span>(<span class="st">&#39;defend&#39;</span>)<span class="op">;</span>
+  <span class="op">}</span>
+
+  <span class="kw">function</span> <span class="at">isMonster</span>(charId) <span class="op">{</span>
+    <span class="cf">return</span> <span class="kw">this</span>.<span class="va">characters</span>.<span class="at">get</span>(charId).<span class="at">party</span> <span class="op">===</span> <span class="st">&#39;monsters&#39;</span><span class="op">;</span>
+  <span class="op">}</span>
+<span class="op">}</span>)<span class="op">;</span>
+<span class="va">battle</span>.<span class="at">start</span>()<span class="op">;</span></code></pre></div>
+<h3 id="las-opciones">Las opciones</h3>
+<p>A cada turno, inicialmente las opciones serán: <code>defend</code>, <code>attack</code> y <code>cast</code>.</p>
+<p>Al elegir <code>defend</code> se aplican las reglas para la acción defender y pasamos al siguiente turno.</p>
+<p>Si se elige <code>attack</code>, las siguientes opciones han de mostrar los identificadores de los personajes para seleccionar un objetivo. Cuando se elige el objetivo, se ejecuta la acción atacar y se pasa al siguiente turno.</p>
+<p>Si elige <code>cast</code>, la siguientes opciones serán los hechizos disponibles (que pueden ser ninguno) y luego la lista de objetivos. De nuevo al elegir el objetivo, se efectúa la acción de lanzar hechizo y se pasa al siguiente turno.</p>
+<h3 id="reglas-de-formación-de-identificadores">Reglas de formación de identificadores</h3>
+<p>Los identificadores de los personajes no son los nombres puesto que estos podrían repetirse. Si un bando tuviera dos personajes murciélago con el nombre <code>Bat</code>, sus identificadores sería <code>Bat</code> y <code>Bat 2</code>. Las reglas de formación de los identificadores son:</p>
+<ol style="list-style-type: decimal">
+<li>Recorre todos los bandos. Por cada bando:
+<ol style="list-style-type: decimal">
+<li>Recorre todos los miembros. Por cada miembros:
+<ol style="list-style-type: decimal">
+<li>Recupera el nombre del personaje y comprueba si está en el histograma de nombres.</li>
+<li>Si no está, añádelo con valor cero.</li>
+<li>Recupera el valor para nombre en el histograma de nombres.</li>
+<li>Si es 0, el identificador es el nombre.</li>
+<li>Si es mayor que 0, el identificador es el nombre seguido de un espacio y el valor del histograma más uno.</li>
+<li>Incrementa el valor del histograma en 1.</li>
+<li>Asigna al personaje ese identificador.</li>
+</ol></li>
+</ol></li>
+</ol>
+</body>
+</html>

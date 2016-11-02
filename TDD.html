@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="docs.css" type="text/css" />
+</head>
+<body>
+<h1 id="tdd-desarrollo-dirigido-por-tests">TDD: Desarrollo dirigido por tests</h1>
+<p>Practicando TDD, iremos escribiendo código de forma que los tests pasen. Los tests vienen dados pero están desactivados. La <a href="./GUIDE.md">guía de la práctica</a> recomienda en qué orden activar los tests para completar la práctica poco a poco.</p>
+<h3 id="tests-y-suites">Tests y suites</h3>
+<p>En esta práctica usamos <a href="http://jasmine.github.io"><strong>Jasmine</strong></a> como framework para tests. En Jasmine escribimos suites y tests. Las suites se pueden anidar y pueden llevar código de inicialización. En general, la API de Jasmine es muy clara y no necesita mayor explicación. De todas formas, aquí tienes un ejemplo:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="at">describe</span>(<span class="st">&#39;Los suites en Jasmine&#39;</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span>
+
+  <span class="at">describe</span>(<span class="st">&#39;pueden anidarse&#39;</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span>
+
+    <span class="at">it</span>(<span class="st">&#39;y encierran tests con expectativas&#39;</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span>
+      <span class="at">expect</span>(<span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span>).<span class="at">toBe</span>(<span class="dv">4</span>)<span class="op">;</span>
+    <span class="op">}</span>)<span class="op">;</span>
+
+  <span class="op">}</span>)<span class="op">;</span>
+
+<span class="op">}</span>)<span class="op">;</span></code></pre></div>
+<p>Se llama test a un fragmento de código que pone a prueba una funcionalidad específica. El test puede pasar o fallar. En caso de fallo, la consola mostrará por qué ha fallado en la forma de una traza:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="fl">15.2</span>) Expected <span class="st">&#39;b&#39;</span> to be <span class="st">&#39;c&#39;</span>.
+    Error<span class="op">:</span> Expected <span class="st">&#39;b&#39;</span> to be <span class="st">&#39;c&#39;</span>.
+        at <span class="at">stack</span> (<span class="ss">/Users/salva/workspace/pvli2017</span><span class="op">-</span>rpg<span class="op">-</span>battle/node_modules/jasmine<span class="op">-</span>core/lib/jasmine<span class="op">-</span>core/<span class="va">jasmine</span>.<span class="at">js</span><span class="op">:</span><span class="dv">1640</span><span class="op">:</span><span class="dv">17</span>)
+        at <span class="at">buildExpectationResult</span> (<span class="ss">/Users/salva/workspace/pvli2017</span><span class="op">-</span>rpg<span class="op">-</span>battle/node_modules/jasmine<span class="op">-</span>core/lib/jasmine<span class="op">-</span>core/<span class="va">jasmine</span>.<span class="at">js</span><span class="op">:</span><span class="dv">1610</span><span class="op">:</span><span class="dv">14</span>)
+        at <span class="va">Spec</span>.<span class="at">expectationResultFactory</span> (<span class="ss">/Users/salva/workspace/pvli2017</span><span class="op">-</span>rpg<span class="op">-</span>battle/node_modules/jasmine<span class="op">-</span>core/lib/jasmine<span class="op">-</span>core/<span class="va">jasmine</span>.<span class="at">js</span><span class="op">:</span><span class="dv">655</span><span class="op">:</span><span class="dv">18</span>)
+        at <span class="va">Spec</span>.<span class="at">addExpectationResult</span> (<span class="ss">/Users/salva/workspace/pvli2017</span><span class="op">-</span>rpg<span class="op">-</span>battle/node_modules/jasmine<span class="op">-</span>core/lib/jasmine<span class="op">-</span>core/<span class="va">jasmine</span>.<span class="at">js</span><span class="op">:</span><span class="dv">342</span><span class="op">:</span><span class="dv">34</span>)
+        at <span class="va">Expectation</span>.<span class="at">addExpectationResult</span> (<span class="ss">/Users/salva/workspace/pvli2017</span><span class="op">-</span>rpg<span class="op">-</span>battle/node_modules/jasmine<span class="op">-</span>core/lib/jasmine<span class="op">-</span>core/<span class="va">jasmine</span>.<span class="at">js</span><span class="op">:</span><span class="dv">599</span><span class="op">:</span><span class="dv">21</span>)
+        at <span class="va">Expectation</span>.<span class="at">toBe</span> (<span class="ss">/Users/salva/workspace/pvli2017</span><span class="op">-</span>rpg<span class="op">-</span>battle/node_modules/jasmine<span class="op">-</span>core/lib/jasmine<span class="op">-</span>core/<span class="va">jasmine</span>.<span class="at">js</span><span class="op">:</span><span class="dv">1564</span><span class="op">:</span><span class="dv">12</span>)
+        at <span class="va">Object</span>.<span class="op">&lt;</span>anonymous<span class="op">&gt;</span> (<span class="ss">/Users/salva/workspace/pvli2017</span><span class="op">-</span>rpg<span class="op">-</span>battle/spec/<span class="va">TurnList</span>.<span class="at">js</span><span class="op">:</span><span class="dv">39</span><span class="op">:</span><span class="dv">36</span>)
+        at <span class="at">attemptSync</span> (<span class="ss">/Users/salva/workspace/pvli2017</span><span class="op">-</span>rpg<span class="op">-</span>battle/node_modules/jasmine<span class="op">-</span>core/lib/jasmine<span class="op">-</span>core/<span class="va">jasmine</span>.<span class="at">js</span><span class="op">:</span><span class="dv">1950</span><span class="op">:</span><span class="dv">24</span>)
+        at <span class="va">QueueRunner</span>.<span class="at">run</span> (<span class="ss">/Users/salva/workspace/pvli2017</span><span class="op">-</span>rpg<span class="op">-</span>battle/node_modules/jasmine<span class="op">-</span>core/lib/jasmine<span class="op">-</span>core/<span class="va">jasmine</span>.<span class="at">js</span><span class="op">:</span><span class="dv">1938</span><span class="op">:</span><span class="dv">9</span>)
+        at <span class="va">QueueRunner</span>.<span class="at">execute</span> (<span class="ss">/Users/salva/workspace/pvli2017</span><span class="op">-</span>rpg<span class="op">-</span>battle/node_modules/jasmine<span class="op">-</span>core/lib/jasmine<span class="op">-</span>core/<span class="va">jasmine</span>.<span class="at">js</span><span class="op">:</span><span class="dv">1923</span><span class="op">:</span><span class="dv">10</span>)</code></pre></div>
+<p>La traza contiene el fallo y dónde se ha producido en el conjunto de llamadas desde la más reciente hasta la más vieja. A veces los fallos son producto de implementaciones que no cumplen las expectativas, otras veces serán fallos en tiempo de ejecución y otras serán fallos de sintaxis.</p>
+<p>Acostúmbrate a fallar y a encontrar en la traza el punto exacto del código que está bajo tu control para solucionarlo. Para ello busca las carpetas <code>spec</code> y <code>src</code> entre la traza. El primer número tras la ruta es la línea del fallo.</p>
+<h3 id="activando-y-desactivando-tests">Activando y desactivando tests</h3>
+<p>Los tests y las suites pueden desactivarse añadiendo el prefijo <code>x</code>. Por ejemplo:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="at">describe</span>(<span class="st">&#39;Los suites en Jasmine&#39;</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span>
+
+  <span class="at">describe</span>(<span class="st">&#39;pueden anidarse&#39;</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span>
+
+    <span class="at">it</span>(<span class="st">&#39;y encierran tests con expectativas&#39;</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span>
+      <span class="at">expect</span>(<span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span>).<span class="at">toBe</span>(<span class="dv">4</span>)<span class="op">;</span>
+    <span class="op">}</span>)<span class="op">;</span>
+
+    <span class="at">xit</span>(<span class="st">&#39;este test está desactivado&#39;</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span>
+
+    <span class="op">}</span>)<span class="op">;</span>
+
+  <span class="op">}</span>)<span class="op">;</span>
+
+  <span class="at">xdescribe</span>(<span class="st">&#39;la suite y todos sus tests están desactivados.&#39;</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span>
+
+  <span class="op">}</span>)<span class="op">;</span>
+
+<span class="op">}</span>)<span class="op">;</span></code></pre></div>
+<p>Los tests desactivados no comprueban las expectativas pero Jasmine nos informará de ellos.</p>
+<p>Recuerda que la práctica sólo puede aprobarse si no hay test fallando ni pendientes.</p>
+<h3 id="el-ciclo-de-desarrollo">El ciclo de desarrollo</h3>
+<p>Cuando estés desarrollando, es conveniente que pases los test a menudo por dos motivos: + Comprobar que avanzas. + Comprobar que no has roto nada.</p>
+<p>Para ello puedes ejecutar el comando:</p>
+<pre><code>$ npm run-script watch</code></pre>
+<p>Esta tarea monitoriza los cambios en los archivos de las carpetas <code>spec</code> y <code>src</code> y cuando detecte un cambio, lanzara todos los tests.</p>
+<p>A veces, el error es tan estrepitoso que rompe la monitorización. En tal caso tendrás que reintroducir el comando manualmente.</p>
+<h3 id="depurando-tests-asíncronos">Depurando tests asíncronos</h3>
+<p>Algunos tests son asíncronos y pueden producir <em>timeouts</em>. En general un <em>timeout</em> no es un resultado positivo. El problema de los <em>timeouts</em> es que pueden ralentizar toda la suite así que la recomendación en estos casos es afrontarlos uno a uno, desactivando el resto y activándolos poco a poco.</p>
+<p>Reconocerás un test asíncrono porque lleva un parámetros <code>done</code> como en el ejemplo:</p>
+<div class="sourceCode"><pre class="sourceCode js"><code class="sourceCode javascript"><span class="kw">var</span> EventEmitter <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;events&#39;</span>).<span class="at">EventEmitter</span><span class="op">;</span>
+
+<span class="at">describe</span>(<span class="st">&#39;EventEmitter&#39;</span><span class="op">,</span> <span class="kw">function</span> () <span class="op">{</span>
+
+  <span class="at">it</span>(<span class="st">&#39;emite eventos arbitrarios&#39;</span><span class="op">,</span> <span class="kw">function</span> (done) <span class="op">{</span>
+    <span class="kw">var</span> ee <span class="op">=</span> <span class="kw">new</span> <span class="at">EventEmitter</span>()<span class="op">;</span>
+    <span class="va">ee</span>.<span class="at">on</span>(<span class="st">&#39;turn&#39;</span><span class="op">,</span> <span class="kw">function</span>(turn) <span class="op">{</span>
+      <span class="at">expect</span>(<span class="va">turn</span>.<span class="at">number</span>).<span class="at">toBe</span>(<span class="dv">1</span>)<span class="op">;</span>
+      <span class="at">done</span>()<span class="op">;</span>
+    <span class="op">}</span>)<span class="op">;</span>
+    <span class="va">ee</span>.<span class="at">emit</span>(<span class="st">&#39;turn&#39;</span><span class="op">,</span> <span class="op">{</span> <span class="dt">number</span><span class="op">:</span> <span class="dv">1</span> <span class="op">}</span>)<span class="op">;</span>
+  <span class="op">}</span>)<span class="op">;</span>
+
+<span class="op">}</span>)<span class="op">;</span></code></pre></div>
+<h2 id="estrategia-general-para-la-depuración">Estrategia general para la depuración</h2>
+<p>Es muy recomendable que mantengas una rama estable donde todos los tests pasen y los que no, estén desactivados. Cuando te embarques en la tarea de hacer que un test pase, crea una rama para esa tarea y cuando termines mézclala con la rama estable.</p>
+<p>Cuando encuentres un error, intenta seguir los siguientes pasos: 1. Desactiva los tests asíncronos que estén tardando rápido. <strong>Necesitas un ciclo de desarrollo rápido.</strong> 2. <strong>¡¡Lee el error!!</strong>. 3. Busca en la traza el lugar donde se original el error: 1. Si es un fallo en una expectativa, localiza el punto de entrada en tu código. 2. Deja trazas con <code>console.log()</code> inspeccionando el estado de tus objetos. 4. Salva y relanza los tests a menudo.</p>
+</body>
+</html>
