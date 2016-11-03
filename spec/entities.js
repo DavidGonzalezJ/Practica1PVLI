@@ -210,7 +210,7 @@ describe('Entities library', function () {
 
   });
 
-  describe('Item type', function () {
+  xdescribe('Item type', function () {
 
     it('allows to create generic items', function () {
       var item = new Item('testItem', new Effect({ hp: 5 }));

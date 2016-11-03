@@ -7,13 +7,13 @@ function Character(name, features) {
   this.party = null;
   // Extrae del parámetro features cada característica y alamacénala en
   // una propiedad.
-  this.initiative = features.initiative || 0,
-  this._defense = features.defense || 0,
-  this._weapon = features.weapon || null,
-  this._hp = features.hp || 0;
-  this.maxHp = features.maxHp || this.hp ,
+  this.initiative = features.initiative || 0;
+  this._defense = features.defense || 0;
+  this.weapon = features.weapon || null;
   this._mp = features.mp || 0;
-  this.maxMp = features.maxMp || this._mp;
+  this._hp = features.hp || 0;
+  this.maxMp = features.maxMp || features.mp || 0;
+  this.maxHp = features.maxHp || features.hp || 15;
 }
 
 Character.prototype._immuneToEffect = ['name', 'weapon'];
@@ -21,7 +21,7 @@ Character.prototype._immuneToEffect = ['name', 'weapon'];
 Character.prototype.isDead = function () {
   // Rellena el cuerpo de esta función
   return this.hp <= 0;
-};
+}; 
 
 Character.prototype.applyEffect = function (effect, isAlly) {
   // Implementa las reglas de aplicación de efecto para modificar las
@@ -29,17 +29,17 @@ Character.prototype.applyEffect = function (effect, isAlly) {
   // si el efecto se ha aplicado o no.
   var applied = true;
   if(!isAlly){
-    var random = dice.dice();
-    applied = (random <= this.defense);
+    applied = (dice <= this.defense);
   }
-  if(applied){
-    this.maxHp += effect.maxHp;
-    this.hp((this.hp + effect.hp));//Set y get de l
-    //¿ARMAS?
-    this.maxMp += effect.maxMp;
-    this.mp(this.mp + effect.mp); //Set y get del mana
+  if(applied || isAlly){
     this.initiative += effect.initiative;
-    this.defense(this.defense + effect.defense);
+    this.defense = this.defense + effect.defense; 
+
+    this.hp = this.hp + effect.hp;
+    this.maxHp = this.maxHp + effect.maxHp;
+
+    this.mp = this.mp + effect.mp;
+    this.maxMp = this.maxMp + effect.maxMp;
   }
   return applied;
 

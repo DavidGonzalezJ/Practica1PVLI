@@ -1,7 +1,5 @@
 'use strict';
-/*Continúa con el módulo src/items.js activando 
-paulatinamente las suites para los tipos Item, 
-Weapon y Scroll que encontrarás en spec/entities.js.*/
+
 
 function Item(name, effect) {
   this.name = name;
