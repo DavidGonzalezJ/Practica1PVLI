@@ -119,7 +119,7 @@ describe('Entities library', function () {
       expect(character.isDead()).toBe(true);
     });
 
-    describe('Effect application', function () {
+    xdescribe('Effect application', function () {
 
       var variations;
       var effect;
@@ -154,6 +154,7 @@ describe('Entities library', function () {
         fakeD100 = 100;
 
         expect(character.applyEffect(effect, isAlly)).toBe(true);
+        expect(character.dice).toBe(100);
         Object.keys(variations).forEach(function (feature) {
           expect(character[feature])
             .toBe(features[feature] + variations[feature]);
@@ -166,6 +167,7 @@ describe('Entities library', function () {
         var isAlly = false;
         fakeD100 = 1;
 
+        expect(character.dice).toBe(1);
         expect(character.applyEffect(effect, isAlly)).toBe(false);
         Object.keys(variations).forEach(function (feature) {
           expect(character[feature]).toBe(features[feature]);
@@ -210,7 +212,7 @@ describe('Entities library', function () {
 
   });
 
-  xdescribe('Item type', function () {
+  describe('Item type', function () {
 
     it('allows to create generic items', function () {
       var item = new Item('testItem', new Effect({ hp: 5 }));
