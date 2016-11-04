@@ -29,7 +29,7 @@ Character.prototype.applyEffect = function (effect, isAlly) {
   // si el efecto se ha aplicado o no.
   var applied = true;
   if(!isAlly){
-    applied = (dice <= this.defense);
+    applied = (dice.d100() >= this.defense);
   }
   if(applied || isAlly){
     this.initiative += effect.initiative;
