@@ -7,25 +7,19 @@ function Item(name, effect) {
 }
 
 function Weapon(name, damage, extraEffect) {
-  //console.log("XXXXXXXXXXXXXXXXXXXXXXX", extraEffect.mp);
-  //var variable = {};
-//  variable["mp"] = 25;
- // variable.mp = 25;
- // variable.mp = 35;
-  //console.log(variable); // -> {mp: 25} 
+
   this.extraEffect = extraEffect || new Effect({});
   this.extraEffect.hp = -damage;
 
   Item.call(this, name, this.extraEffect);
-
-  // Haz que Weapon sea subtipo de Item haciendo que llame al constructor
-  // de Item.
-
 }
+
 // Termina de implementar la herencia haciendo que la propiedad prototype de
 // Item sea el prototipo de Weapon.prototype y recuerda ajustar el constructor.
 Weapon.prototype = Object.create(Item.prototype);
 Weapon.prototype.constructor = Weapon;
+
+
 
 function Scroll(name, cost, effect) {
   Item.call(this, name, effect);
@@ -39,6 +33,7 @@ Scroll.prototype.canBeUsed = function (mp) {
   // al coste del hechizo.
   return mp >= this.cost;
 };
+
 
 function Effect(variations) {
   // Copia las propiedades que se encuentran en variations como propiedades de

@@ -5,6 +5,7 @@ function Character(name, features) {
   features = features || {};
   this.name = name;
   this.party = null;
+
   // Extrae del parámetro features cada característica y alamacénala en
   // una propiedad.
   this.initiative = features.initiative || 0;
@@ -14,6 +15,8 @@ function Character(name, features) {
   this._hp = features.hp || 0;
   this.maxMp = features.maxMp || features.mp || 0;
   this.maxHp = features.maxHp || features.hp || 15;
+
+  this._isDead = (this.hp <= 0);
 }
 
 Character.prototype._immuneToEffect = ['name', 'weapon'];

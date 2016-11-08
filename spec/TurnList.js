@@ -1,6 +1,6 @@
 'use strict';
 
-xdescribe('The TurnList type', function () {
+describe('The TurnList type', function () {
   var TurnList = require('../src/TurnList');
   var turnList;
   var characters;
