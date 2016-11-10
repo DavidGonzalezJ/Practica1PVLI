@@ -18,6 +18,18 @@ Options.prototype.get = function (id) {
 };
 
 Options.prototype.select = function (id) {
+	var lista = this.list();
+	var found = false;
+	var i = 0;
+	while(!found && i < lista.length){
+		found = lista[i] === id;
+		i++;
+	}
+	if(found){
+		this.emit('chose', id, this.get(id));
+	}else{
+		this.emit('choseError','option-does-not-exist', id);
+	}
   // Haz que se emita un evento cuando seleccionamos una opción.
 };
 

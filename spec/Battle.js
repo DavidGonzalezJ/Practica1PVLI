@@ -1,6 +1,6 @@
 var mockery = require('mockery');
 
-xdescribe('Battle type', function () {
+describe('Battle type', function () {
   'use strict';
 
   var Battle;
@@ -93,7 +93,7 @@ xdescribe('Battle type', function () {
 
   });
 
-  xdescribe('Start', function () {
+  describe('Start', function () {
 
     it('includes the characters who are going to fight by party.',
     function (done) {

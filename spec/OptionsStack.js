@@ -2,7 +2,7 @@
 
 var mockery = require('mockery');
 
-xdescribe('OptionsStack type', function () {
+describe('OptionsStack type', function () {
   var OptionsStack;
   var optionsStack;
 
@@ -64,14 +64,14 @@ xdescribe('OptionsStack type', function () {
     expect(MockOptions.prototype.get).toHaveBeenCalled();
   });
 
-  xit('proxies select() to the latest options group.', function () {
+  it('proxies select() to the latest options group.', function () {
     var group = new MockOptions();
     optionsStack.current = group;
     optionsStack.select('x');
     expect(MockOptions.prototype.select).toHaveBeenCalledWith('x');
   });
 
-  xit('proxies list() to the latest options group.', function () {
+  it('proxies list() to the latest options group.', function () {
     var group = new MockOptions();
     optionsStack.current = group;
     optionsStack.list();

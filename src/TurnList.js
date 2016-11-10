@@ -24,7 +24,6 @@ TurnList.prototype.next = function () {
       this.activeCharacterId = this.list[i];
     }
     i++;
-    
   }
 
 
