@@ -15,6 +15,7 @@ function Battle() {
   this._grimoires = {};
   this._charactersById = {};
   this._turns = new TurnList();
+  //this.histograma = {};
 
   this.options = new OptionsStack();
   this.characters = new CharactersView();
@@ -74,6 +75,7 @@ Battle.prototype._extractCharactersById = function (parties) {
   var idCounters = {};
   var characters = [];
   var partyIds = Object.keys(parties);
+
   partyIds.forEach(function (partyId) {
     var members = parties[partyId].members;
     assignParty(members, partyId);
@@ -91,30 +93,18 @@ Battle.prototype._extractCharactersById = function (parties) {
   }
 
   function useUniqueName(character) {
-    var nombre = character.name;
-    /*characters.forEach(function(aux){
-      if(aux.party === character.party && character.name === aux.name)
-        nombre = nombre + 1;
-    });*/
-    return nombre;
-/*Los identificadores de los personajes no son los nombres 
-puesto que estos podrían repetirse. Si un bando tuviera dos
-personajes murciélago con el nombre Bat, sus identificadores 
-sería Bat y  Bat 2. 
-Las reglas de formación de los identificadores son:
-Recorre todos los bandos. Por cada bando:
-Recorre todos los miembros. Por cada miembros:
-Recupera el nombre del personaje y comprueba si está en el histograma de nombres.
-Si no está, añádelo con valor cero.
-Recupera el valor para nombre en el histograma de nombres.
-Si es 0, el identificador es el nombre.
-Si es mayor que 0, el identificador es el nombre seguido de un espacio y el valor del histograma más uno.
-Incrementa el valor del histograma en 1.
-Asigna al personaje ese identificador.*/
     // Genera nombres únicos de acuerdo a las reglas
     // de generación de identificadores que encontrarás en
     // la descripción de la práctica o en la especificación.
-  //console.log('nombre unico', character);
+   var nombre = character.name;
+    if(!idCounters.hasOwnProperty(nombre)){
+      idCounters[nombre] = 0;
+      idCounters[nombre] ++;
+      return nombre;
+    }else{
+      idCounters[nombre] ++;
+      return nombre + ' ' + (idCounters[nombre]);
+    }
   }
 };
 
@@ -171,13 +161,14 @@ Battle.prototype._checkEndOfBattle = function () {
      /////////////////CAMBIO///////
     var i = 1;
     var common = true;
+    var partyIni = characters[0].party;
     while(common && i < characters.length){
-      if(characters[i].party !== characters[i-1].party){
+      if(characters[i].party !== partyIni){
         common = false;
       }
     }
     if(common)
-      return characters[0].party;
+      return partyIni;
     else return null;
     //console.log(characters);
      /////////////////CAMBIO///////
@@ -200,7 +191,7 @@ Battle.prototype._onAction = function (action) {
   };
   // Debe llamar al método para la acción correspondiente:
   // defend -> _defend; attack -> _attack; cast -> _cast
-   /////////////////CAMBIO///////
+  /////////////////CAMBIO///////
   if(action === defend)
     this._defend();
   else if(action === attack)

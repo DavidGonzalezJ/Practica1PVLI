@@ -78,7 +78,7 @@ describe('Battle type', function () {
 
   });
 
-  xdescribe('Turn list', function () {
+  describe('Turn list', function () {
 
     it('includes all the characters sorted by initiative.', function (done) {
       var sortedByInitiative = ['Fasty', 'Tank', 'Wizz'];
@@ -123,7 +123,7 @@ describe('Battle type', function () {
       battle.start();
     });
 
-    it('ignore dead characters.', function (done) {
+    xit('ignore dead characters.', function (done) {
       fastEnemy.hp = 0;
       currentSetup.monsters.members.push(characters.fastEnemy);
       battle.setup(currentSetup);
@@ -140,15 +140,17 @@ describe('Battle type', function () {
 
   });
 
-  xdescribe('Parties in battle', function () {
+  describe('Parties in battle', function () {
 
     it('can contain repeated members, each will be assigned a different id.',
     function () {
+      currentSetup.monsters.members.push(characters.fastEnemy);
       currentSetup.monsters.members.push(characters.fastEnemy);
       battle.setup(currentSetup);
       var characterIds = Object.keys(battle.characters.all());
       expect(characterIds).toContain('Fasty');
       expect(characterIds).toContain('Fasty 2');
+      expect(characterIds).toContain('Fasty 3');
     });
 
   });
