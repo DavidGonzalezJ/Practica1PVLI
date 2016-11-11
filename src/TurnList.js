@@ -40,8 +40,8 @@ TurnList.prototype._sortByInitiative = function () {
   // función de ordenación!
  
 
-  var initiativeArray = new Array;
-  var nameArray = new Array;
+  var initiativeArray = [];
+  var nameArray = [];
   for(var name in this._charactersById) {
     var aux = {};
     aux.name = name;
