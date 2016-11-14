@@ -189,7 +189,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xit('increases defense feature by 10%.', function (done) {
+      it('increases defense feature by 10%.', function (done) {
         var currentDefense = fastEnemy.defense;
         fakeD100 = currentDefense + 1;
         var expectedDefense = Math.ceil(currentDefense * 1.1);

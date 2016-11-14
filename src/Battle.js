@@ -15,7 +15,6 @@ function Battle() {
   this._grimoires = {};
   this._charactersById = {};
   this._turns = new TurnList();
-  //this.histograma = {};
 
   this.options = new OptionsStack();
   this.characters = new CharactersView();
@@ -42,7 +41,6 @@ Battle.prototype.setup = function (parties) {
 Battle.prototype.start = function () {
   this._inProgressAction = null;
   this._stopped = false;
-  //console.log(this._getCharIdsByParty());
   this.emit('start', this._getCharIdsByParty());
   this._nextTurn();
 };
@@ -88,7 +86,6 @@ Battle.prototype._extractCharactersById = function (parties) {
     characters.forEach(function(character){
       character.party = party;
     });
-    //console.log (party, characters);
     ///CAMBIO////
   }
 
@@ -168,7 +165,6 @@ Battle.prototype._checkEndOfBattle = function () {
     if(common)
       return partyIni;
     else return null;
-    //console.log(characters);
      /////////////////CAMBIO///////
   }
 };
@@ -224,19 +220,26 @@ con el nombre de la acción, los identificadores del
 
 Battle.prototype._improveDefense = function (targetId) {
   var states = this._states[targetId];
-  this.characters[targetId].defense *= 1.1;
- // targetId['defense'] = targetId['defense'] * 1.1;
-  console.log(targetId);
-  // Implementa la mejora de la defensa del personaje.
-  return this.characters[targetId].defense;
+  //this._states[targetId] = states;
+  //charIdsByParty[party].push(charId);
+  states[targetId] = (this._charactersById[targetId].defense);
 
+  this._charactersById[targetId].defense = Math.ceil(this._charactersById[targetId].defense * 1.1);
+  //Implementa la mejora de la defensa del personaje.
+  //return this.characters[targetId].defense;
+  console.log(states, 'mejoro defensa', this._charactersById[targetId].defense);
+  return this._charactersById[targetId].defense;
 };
 
 Battle.prototype._restoreDefense = function (targetId) {
   // Restaura la defensa del personaje a cómo estaba antes de mejorarla.
   // Puedes utilizar el atributo this._states[targetId] para llevar tracking
   // de las defensas originales.
-  targetId.defense = states[targetId].defense;
+  var aux = targetId.defense;
+  this._charactersById[targetId].defense = states[targetId];
+  console.log(aux, 'restauro defensa', targetId.defense);
+
+  return states[targetId];
 };
 
 Battle.prototype._attack = function () {
