@@ -211,29 +211,10 @@ Battle.prototype._defend = function () {
   this._executeAction();
 };
 
-/*La acción defend rellena la estructura this._action 
-con el nombre de la acción, los identificadores del
- personaje activo y del objetivo, el efecto y la nueva defensa. 
- Todos menos la defensa son necesarios para poder llamar a la 
- función _executeAction() que ejecutará la acción e informará 
- del resultado.*/
 
 Battle.prototype._improveDefense = function (targetId) {
-  /*var states = this._states[targetId];
-  //this._states[targetId] = states;
-  //charIdsByParty[party].push(charId);
-  states[targetId] = (this._charactersById[targetId].defense);
-
-  this._charactersById[targetId].defense = Math.ceil(this._charactersById[targetId].defense * 1.1);
-  //Implementa la mejora de la defensa del personaje.
-  //return this.characters[targetId].defense;
-  console.log(states, 'mejoro defensa', this._charactersById[targetId].defense);
-  return this._charactersById[targetId].defense;*/
   this._states[targetId] = this._charactersById[targetId].defense;
-  //console.log(this._states[targetId],'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
   var newDef = Math.ceil(this._charactersById[targetId].defense * 1.1);
-  console.log(newDef,'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
-  //this._charactersById[targetId].defense = newDef;
   this._charactersById[targetId].defense = newDef;
   return newDef;
 
@@ -244,12 +225,7 @@ Battle.prototype._restoreDefense = function (targetId) {
   // Restaura la defensa del personaje a cómo estaba antes de mejorarla.
   // Puedes utilizar el atributo this._states[targetId] para llevar tracking
   // de las defensas originales.
-  /*var aux = targetId.defense;
-  this._charactersById[targetId].defense = states[targetId];
-  console.log(aux, 'restauro defensa', targetId.defense);*/
-  //console.log(this._charactersById[targetId]._defense,'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX' );
   this._charactersById[targetId]._defense = this.states[targetId];
-  //return states[targetId];
 };
 
 Battle.prototype._attack = function () {

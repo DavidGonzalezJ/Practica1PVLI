@@ -14,18 +14,23 @@ TurnList.prototype.reset = function (charactersById) {
 TurnList.prototype.next = function () {
   // Haz que calcule el siguiente turno y devuelva el resultado
   // según la especificación. Recuerda que debe saltar los personajes
-  // muertos.
-  var i = 0;
-  var notDead = false;
-  this.turnNumber++;
-  while (!notDead && i < this.list.length){
+  // muertos. 
+
+  var i;
+  if (this.turnNumber > 0 && this._charactersById[this.list[this.turnNumber - 1]].isDead()) {
+    i = this.turnNumber + 1;
+  }else i = this.turnNumber;
+
+  var alive = false;
+  while (!alive){
+    i = i % this.list.length;
     if(!this._charactersById[this.list[i]].isDead()){
-      notDead = true;
+      alive = true;
       this.activeCharacterId = this.list[i];
     }
     i++;
   }
-
+  this.turnNumber++;
 
   var turn = {
     number: this.turnNumber,
