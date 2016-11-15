@@ -32,15 +32,16 @@ Character.prototype.applyEffect = function (effect, isAlly) {
   if(!isAlly){
     applied = (dice.d100() >= this.defense);
   }
+
   if(applied || isAlly){
-    this.initiative += effect.initiative;
-    this.defense = this.defense + effect.defense; 
+    this.initiative += effect.initiative || 0;
+    this.defense += effect.defense || 0; 
 
-    this.hp = this.hp + effect.hp;
-    this.maxHp = this.maxHp + effect.maxHp;
+    this.hp +=  effect.hp || 0;
+    this.maxHp += effect.maxHp || 0;
 
-    this.mp = this.mp + effect.mp;
-    this.maxMp = this.maxMp + effect.maxMp;
+    this.mp += effect.mp || 0;
+    this.maxMp += effect.maxMp || 0;
   }
   return applied;
 

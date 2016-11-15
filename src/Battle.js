@@ -86,7 +86,6 @@ Battle.prototype._extractCharactersById = function (parties) {
     characters.forEach(function(character){
       character.party = party;
     });
-    ///CAMBIO////
   }
 
   function useUniqueName(character) {
@@ -195,11 +194,11 @@ Battle.prototype._onAction = function (action) {
   battleOptions[action]();
 */
   if(action === 'defend')
-    this._defend();
+    this.emit(this._action, this._defend());
   else if(action === 'attack')
-    this._attack();
+    this.emit(this._action, this._attack());
   else if(action === 'cast')
-    this._cast();
+    this.emit(this._action, this._cast());
    /////////////////CAMBIO///////
 };
 
@@ -217,8 +216,6 @@ Battle.prototype._improveDefense = function (targetId) {
   var newDef = Math.ceil(this._charactersById[targetId].defense * 1.1);
   this._charactersById[targetId].defense = newDef;
   return newDef;
-
-
 };
 
 Battle.prototype._restoreDefense = function (targetId) {
@@ -232,6 +229,7 @@ Battle.prototype._attack = function () {
   var self = this;
   self._showTargets(function onTarget(targetId) {
     // Implementa lo que pasa cuando se ha seleccionado el objetivo.
+    
     self._executeAction();
     self._restoreDefense(targetId);
   });
@@ -250,7 +248,6 @@ Battle.prototype._executeAction = function () {
   var activeCharacter = this._charactersById[action.activeCharacterId];
   var targetCharacter = this._charactersById[action.targetId];
   var areAllies = activeCharacter.party === targetCharacter.party;
-
   var wasSuccessful = targetCharacter.applyEffect(effect, areAllies);
   this._action.success = wasSuccessful;
 

@@ -169,7 +169,7 @@ describe('Battle type', function () {
 
     describe('Defend action', function () {
 
-      it('informs of the result.', function (done) {
+      xit('informs of the result.', function (done) {
         var currentDefense = fastEnemy.defense;
         var expectedDefense = Math.ceil(currentDefense * 1.1);
 
@@ -263,7 +263,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xit('accumulates turn by turn.', function (done) {
+      it('accumulates turn by turn.', function (done) {
         var currentDefense = fastEnemy.defense;
         var expectedDefense =
             Math.ceil(Math.ceil(currentDefense * 1.1) * 1.1);
