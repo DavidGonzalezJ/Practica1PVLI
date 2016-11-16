@@ -240,6 +240,19 @@ Battle.prototype._cast = function () {
   var self = this;
   self._showScrolls(function onScroll(scrollId, scroll) {
     // Implementa lo que pasa cuando se ha seleccionado el hechizo.
+    var team = self._charactersById[self._turns.activeCharacterId].party;
+    scroll = self._grimoires[team][scrollId];
+
+    self._charactersById[self._turns.activeCharacterId].mp -= scroll.cost;
+    self._showTargets(function onTarget(targetId) {
+      self._action.targetId = targetId;
+      self._action.scrollName = scrollId;
+      //console.log(scroll, ' soy un effecto', scrollId);
+      self._action.effect = scroll.effect;
+      self._executeAction();
+      self._restoreDefense(targetId);
+    });
+
   });
 };
 
@@ -269,7 +282,6 @@ Battle.prototype._showTargets = function (onSelection) {
       targets[nameChar] = nameChar;
     }
   }
-  console.log(targets);
   this.options.current = targets;
   this.options.current.on('chose', onSelection);
 };
@@ -277,6 +289,17 @@ Battle.prototype._showTargets = function (onSelection) {
 Battle.prototype._showScrolls = function (onSelection) {
   // Toma ejemplo de la función anterior para mostrar los hechizos. Estudia
   // bien qué parámetros se envían a los listener del evento chose.
+  //console.log(this._grimoires);
+  var scrolls = {};
+  var team = this._charactersById[this._turns.activeCharacterId].party;
+  var spellAc = this._grimoires[team];
+  for (var spell in spellAc){
+    //console.log(spell, 'soy un spell');
+    if(spellAc[spell].canBeUsed(this._charactersById[this._turns.activeCharacterId].mp))
+      scrolls[spell] = spell;
+  }
+  //console.log (scrolls, 'soy scroll');
+  this.options.current = scrolls;
   this.options.current.on('chose', onSelection);
 };
 

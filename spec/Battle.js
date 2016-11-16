@@ -234,7 +234,7 @@ describe('Battle type', function () {
         battle.start();
       });
 
-      xit('increases the odds of defending against cast.', function (done) {
+      it('increases the odds of defending against cast.', function (done) {
         var currentDefense = fastEnemy.defense;
         fakeD100 = currentDefense + 1;
         var expectedDefense = Math.ceil(currentDefense * 1.1);
@@ -504,7 +504,7 @@ describe('Battle type', function () {
            battle.start();
          });
 
-      xit('(cast) makes the target\'s defense to be restored.',
+      it('(cast) makes the target\'s defense to be restored.',
       function (done) {
         var originalDefense = fastEnemy.defense;
 
@@ -536,7 +536,7 @@ describe('Battle type', function () {
 
     });
 
-    xdescribe('Cast action', function () {
+    describe('Cast action', function () {
 
       it('requires to choose an scroll.', function (done) {
         battle.on('turn', function () {
@@ -796,7 +796,7 @@ describe('Battle type', function () {
 
   });
 
-  xdescribe('Some battles', function () {
+  describe('Some battles', function () {
 
     it('are won by heroes.', function (done) {
       heroTank.defense = 0;
