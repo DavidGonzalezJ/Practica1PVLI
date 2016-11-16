@@ -222,14 +222,15 @@ Battle.prototype._restoreDefense = function (targetId) {
   // Restaura la defensa del personaje a cómo estaba antes de mejorarla.
   // Puedes utilizar el atributo this._states[targetId] para llevar tracking
   // de las defensas originales.
-  this._charactersById[targetId]._defense = this.states[targetId];
+  this._charactersById[targetId]._defense = this._states[targetId];
 };
 
 Battle.prototype._attack = function () {
   var self = this;
   self._showTargets(function onTarget(targetId) {
     // Implementa lo que pasa cuando se ha seleccionado el objetivo.
-    
+    self._action.targetId = targetId;
+    self._action.effect = self._charactersById[self._action.activeCharacterId].weapon.extraEffect;
     self._executeAction();
     self._restoreDefense(targetId);
   });
@@ -262,7 +263,14 @@ Battle.prototype._informAction = function () {
 Battle.prototype._showTargets = function (onSelection) {
   // Toma ejemplo de la función ._showActions() para mostrar los identificadores
   // de los objetivos.
-
+  var targets = {};
+  for(var nameChar in this._charactersById){
+    if(!this._charactersById[nameChar].isDead()){
+      targets[nameChar] = nameChar;
+    }
+  }
+  console.log(targets);
+  this.options.current = targets;
   this.options.current.on('chose', onSelection);
 };
 
