@@ -809,14 +809,19 @@ describe('Battle type', function () {
         case 1:
           this.options.select('attack');
           this.options.select('Tank');
+         //           console.log(fastEnemy,'PALMA PUTO FASTY 1');
+
           break;
         case 2:
           this.options.select('attack');
           this.options.select('Fasty');
+          //          console.log(fastEnemy,'PALMA PUTO FASTY 2');
+
           break;
         case 3:
           this.options.select('attack');
           this.options.select('Fasty');
+         // console.log(fastEnemy,'PALMA PUTO FASTY 3');
           break;
         }
       });
