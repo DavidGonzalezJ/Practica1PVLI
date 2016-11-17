@@ -30,7 +30,6 @@ Options.prototype.select = function (id) {
 	}else{
 		this.emit('choseError','option-does-not-exist', id);
 	}
-  // Haz que se emita un evento cuando seleccionamos una opción.
 };
 
 module.exports = Options;

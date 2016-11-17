@@ -12,12 +12,10 @@ TurnList.prototype.reset = function (charactersById) {
 };
 
 TurnList.prototype.next = function () {
-  // Haz que calcule el siguiente turno y devuelva el resultado
-  // según la especificación. Recuerda que debe saltar los personajes
-  // muertos. 
-  var i = this.turnNumber;
 
+  var i = this.turnNumber;
   var alive = false;
+
   while (!alive){
     i = i % this.list.length;
     if(!this._charactersById[this.list[i]].isDead()){
@@ -37,12 +35,9 @@ TurnList.prototype.next = function () {
 };
 
 TurnList.prototype._sortByInitiative = function () {
-  // Utiliza la función Array.sort(). ¡No te implementes tu propia
-  // función de ordenación!
- 
-
   var initiativeArray = [];
   var nameArray = [];
+
   for(var name in this._charactersById) {
     var aux = {};
     aux.name = name;
@@ -57,7 +52,6 @@ TurnList.prototype._sortByInitiative = function () {
     if (a.initiative > b.initiative) {
       return -1;
     }
-  // a must be equal to b
     return 0;
   });
 

@@ -19,7 +19,6 @@ var lib = module.exports = {
     get wand() {
       return new items.Weapon('wand', 5);
     },
-    // Implementa los colmillos y el pseudópodo
     get fangs() {
       return new items.Weapon('fangs', 10);
     },
@@ -40,7 +39,6 @@ var lib = module.exports = {
       });
     },
 
-    // Implementa el mago
     get heroWizard() {
       return new Character('Wizard', {
         initiative: 4,
@@ -61,7 +59,6 @@ var lib = module.exports = {
       });
     },
 
-    // Implementa el limo
       get monsterSlime() {
         return new Character('slime', {
           initiative: 2,
@@ -71,8 +68,6 @@ var lib = module.exports = {
           mp: 50
         });
       },
-
-      // Implementa el murcielago
 
       get monsterBat() {
         return new Character('bat', {
@@ -91,7 +86,6 @@ var lib = module.exports = {
       return new items.Scroll('health', 10, new Effect({ hp: 25 }));
     },
 
-    // Implementa la bola de fuego
     get fireball(){
       return new items.Scroll('fireball', 30, new Effect({ hp: -25 }));
     }

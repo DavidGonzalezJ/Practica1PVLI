@@ -6,8 +6,6 @@ function Character(name, features) {
   this.name = name;
   this.party = null;
 
-  // Extrae del parámetro features cada característica y alamacénala en
-  // una propiedad.
   this.initiative = features.initiative || 0;
   this._defense = features.defense || 0;
   this.weapon = features.weapon || null;
@@ -20,14 +18,11 @@ function Character(name, features) {
 Character.prototype._immuneToEffect = ['name', 'weapon'];
 
 Character.prototype.isDead = function () {
-  // Rellena el cuerpo de esta función
   return this.hp <= 0;
 }; 
 
 Character.prototype.applyEffect = function (effect, isAlly) {
-  // Implementa las reglas de aplicación de efecto para modificar las
-  // características del personaje. Recuerda devolver true o false según
-  // si el efecto se ha aplicado o no.
+
   var applied = true;
   if(!isAlly){
     applied = (dice.d100() >= this.defense);
@@ -63,9 +58,8 @@ Object.defineProperty(Character.prototype, 'hp', {
   set: function (newValue) {
     this._hp = Math.max(0, Math.min(newValue, this.maxHp));
   }
-  // Puedes usar la mísma ténica que antes para mantener el valor de hp en el
-  // rango correcto.
 });
+
 Object.defineProperty(Character.prototype, 'defense', {
    get: function () {
     return this._defense;
@@ -74,7 +68,5 @@ Object.defineProperty(Character.prototype, 'defense', {
     this._defense = Math.max(0, Math.min(newValue, 100));
   }
 });
-
-
 
 module.exports = Character;
